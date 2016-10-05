@@ -3,8 +3,6 @@ sudo: required
 language: node_js
 node_js:
   - "node"
-  - "6"
-  - "5"
   - "4"
 
 cache:
@@ -13,3 +11,12 @@ cache:
 
 services:
   - docker
+
+before_install:
+  - docker build -t klaakso/berrypod-server:latest -f Dockerfile
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push klaakso/berrypod-server;
+    fi
