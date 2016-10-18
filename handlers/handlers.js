@@ -9,10 +9,15 @@ module.exports = {
     return res('Not yet implemented, but thanks for trying!');
   },
 
+  // Login
+  login: (req, res) => {
+    
+  },
+
   // Profile
   getProfile: (req, res) => {
     return res({
-      userid: '1',
+      userid: 1,
       username: 'Anonymous',
       firstname: 'Dread Pirate',
       lastname: 'Roberts'

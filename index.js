@@ -1,21 +1,22 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Fs = require('fs');
 const Nes = require('nes');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const Pack = require('./package');
 
-const server = new Hapi.Server();
 const routes = require('./config/routes');
+const server = new Hapi.Server();
 
 server.connection({
   host: 'localhost',
-  port: 3000
+  port: 80
 });
 
-const options = {
+const swaggerOptions = {
   basePath: '/api/v1/',
   info: { 'title': 'BerryPod API Documentation', 'version': Pack.version }
 };
@@ -26,7 +27,7 @@ server.register([
   Vision,
   {
     'register': HapiSwagger,
-    'options': options
+    'options': swaggerOptions
   }], (err) => {
     server.start( (err) => {
       if (err) {

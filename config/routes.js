@@ -15,6 +15,17 @@ module.exports = [
     }
   },
 
+  // Login
+  {
+    method: 'POST',
+    path: '/login',
+    config: {
+      handler: Handlers.notYetImplemented,
+      description: 'Login with username and password',
+      notes: 'Login with username and password'
+    }
+  },
+
   // Profiles
   {
     method: 'GET',
