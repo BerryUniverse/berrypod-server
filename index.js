@@ -5,18 +5,24 @@ const Hapi = require('hapi');                     // Hapi.js Framework
 const Nes = require('nes');                       // Websocket adapter for Hapi
 const Inert = require('inert');                   // Static file and directory handler
 const Vision = require('vision');                 // Template rendering plugin
+const Good = require('good');                     // Process monitoring plugin
 const HapiSwagger = require('hapi-swagger');      // Swagger interface for Hapi
 const HapiAuthJwt = require('hapi-auth-jwt');     // JWT authentication plugin for Hapi
 
-const rethink = require('rethinkdb');             // RethinkDB driver
+const mongoose = require('mongoose');
 const glob = require('glob');
 const path = require('path');
+
 const Pack = require('./package');
 // ------------------------------------------------------------------------------------- //
+
+// Database connection 
+const dbUrl = 'mongodb://localhost:27017/berrypod';
 
 // Create Hapi server instance
 const server = new Hapi.Server();
 
+// Server address and port
 server.connection({
   host: 'localhost',
   port: 80
@@ -32,6 +38,7 @@ server.register([
   Nes,
   Inert,
   Vision,
+  Good,
   { 'register': HapiSwagger, 'options': swaggerOptions }
 ], (err) => {
 
@@ -43,9 +50,8 @@ server.register([
     }
   });
 
-  // Look through the routes in
-  // all the subdirectories of API
-  // and create a new route for each
+  // Look through the routes in all the subdirectories
+  // of API and create a new route for each
   glob.sync('api/**/routes/*.js', {
     root: __dirname
   }).forEach(file => {
@@ -56,21 +62,14 @@ server.register([
   // Start the server
   server.start((err) => {
     if (err) throw err;
+    console.log('Server running at', server.info.uri);
 
-    console.log('Server running at:', server.info.uri);
-    console.log('Connecting to rethinkdb...');
-
-    rethink.connect({ host: 'localhost', port: 28015 }, (err, conn) => {
+    // Connect to MongoDB database through Mongoose
+    mongoose.connect(dbUrl, {}, (err) => {
       if (err) throw err;
-      console.log('Successfully connected to RethinkDB @', conn.host + ':' + conn.port);
-
-      /*
-      rethink.db('test').tableCreate('tv_shows').run(conn, (err, res) => {
-        if (err) throw err;
-        console.log(res);
-      });
-      */
+      console.log('Connected to database at', dbUrl);
     });
 
   });
+
 });
