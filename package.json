@@ -22,16 +22,18 @@
   "author": "Konsta Laakso",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "boom": "^4.2.0",
     "glob": "^7.1.1",
+    "good": "^7.0.2",
     "hapi": "^15.0.3",
     "hapi-auth-jwt": "^4.0.0",
     "hapi-swagger": "^7.2.0",
     "inert": "^4.0.2",
     "joi": "^9.1.0",
     "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.4",
     "nes": "^6.3.1",
-    "rethinkdb": "^2.3.3",
     "vision": "^4.1.0"
   },
   "devDependencies": {
