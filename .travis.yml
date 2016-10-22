@@ -26,4 +26,4 @@ addons:
     sources:
     - deadsnakes
     packages:
-    - python-2.7.12
+    - python
