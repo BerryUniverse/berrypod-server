@@ -13,19 +13,20 @@ const mongoose = require('mongoose');
 const glob = require('glob');
 const path = require('path');
 
+const Config = require('./config');
 const Pack = require('./package');
 // ------------------------------------------------------------------------------------- //
 
 // Database connection 
-const dbUrl = 'mongodb://localhost:27017/berrypod';
+const dbUrl = 'mongodb://'+ Config.db.host + ':' + Config.db.port + '/' + Config.db.dbName;
 
 // Create Hapi server instance
 const server = new Hapi.Server();
 
 // Server address and port
 server.connection({
-  host: 'localhost',
-  port: 80
+  host: Config.app.host,
+  port: Config.app.port
 });
 
 const swaggerOptions = {
@@ -44,7 +45,7 @@ server.register([
 
   // Add JWT as authentication strategy
   server.auth.strategy('jwt', 'jwt', {
-    key: 'insertVerySercretKeyHere',
+    key: Config.key,
     verifyOptions: {
       algorithms: ['HS256']
     }
@@ -73,3 +74,4 @@ server.register([
   });
 
 });
+g
