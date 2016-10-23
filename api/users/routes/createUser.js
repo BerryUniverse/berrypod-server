@@ -22,6 +22,9 @@ module.exports = {
     description: 'Create new user',
     notes: 'Create new user',
     tags: ['api'],
+    validate: {
+      payload: createUserSchema
+    },
     pre: [
       { method: verifyUniqueUser }
     ],
