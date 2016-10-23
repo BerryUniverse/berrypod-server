@@ -45,7 +45,7 @@ server.register([
 
   // Add JWT as authentication strategy
   server.auth.strategy('jwt', 'jwt', {
-    key: Config.key,
+    key: Config.jwtKey,
     verifyOptions: {
       algorithms: ['HS256']
     }
@@ -74,4 +74,3 @@ server.register([
   });
 
 });
-g
