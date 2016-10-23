@@ -1,4 +1,4 @@
-#sudo: required
+sudo: required
 
 language: node_js
 node_js:
@@ -9,14 +9,14 @@ cache:
   directories:
     - ./node_modules
 
-#services:
-#  - docker
+services:
+  - docker
 
-#before_install:
-#  - docker build -t klaakso/berrypod-server .
+before_install:
+  - docker build -t klaakso/berrypod-server .
 
-#after_success:
-#  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-#    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-#    docker push klaakso/berrypod-server;
-#    fi
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push klaakso/berrypod-server;
+    fi
