@@ -24,6 +24,8 @@ cache:
 addons:
   apt:
     sources:
+    - ubuntu-toolchain-r-test
     - deadsnakes
     packages:
     - python
+    - g++-4.8
