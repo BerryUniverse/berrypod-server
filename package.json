@@ -16,7 +16,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "test": "lab -c",
+    "test": "lab -r lcov | ./node_modules/.bin/coveralls",
     "nsp": "nsp check --output checkstyle"
   },
   "author": "Konsta Laakso",
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "code": "^4.0.0",
+    "coveralls": "^2.11.14",
     "lab": "^11.1.0",
     "nodemon": "1.11.0",
     "nsp": "^2.6.1",
