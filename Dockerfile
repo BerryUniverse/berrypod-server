@@ -3,9 +3,6 @@ FROM mhart/alpine-node:4.6.0
 # Set working directory inside container
 WORKDIR /app
 
-# Add OS level packages
-RUN apk add --no-cache python2
-
 # Update npm
 RUN npm install -g npm@3.10.8
 
