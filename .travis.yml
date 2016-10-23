@@ -1,4 +1,4 @@
-sudo: required
+#sudo: required
 
 language: node_js
 node_js:
@@ -20,12 +20,3 @@ cache:
 #    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
 #    docker push klaakso/berrypod-server;
 #    fi
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - deadsnakes
-    packages:
-    - python
-    - g++-4.8
