@@ -13,7 +13,7 @@ function createToken(user) {
   }
 
   // Sign the JWT
-  jwt.sign({ id: user._id, username: user.username, scope: scopes }, secret, { algorith: 'HS256', expiresIn: '1h' });
+  return jwt.sign({ id: user._id, username: user.username, scope: scopes }, secret, { algorithm: 'HS256', expiresIn: '1h' });
 }
 
 module.exports = createToken;
