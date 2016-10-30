@@ -18,7 +18,7 @@ const Pack = require('./package');
 // ------------------------------------------------------------------------------------- //
 
 // Database connection 
-const dbUrl = 'mongodb://'+ Config.db.host + ':' + Config.db.port + '/' + Config.db.dbName;
+const dbUrl = 'mongodb://' + Config.db.host + ':' + Config.db.port + '/' + Config.db.dbName;
 
 // Create Hapi server instance
 const server = new Hapi.Server();
@@ -29,9 +29,29 @@ server.connection({
   port: Config.app.port
 });
 
+// Swagger configuration
 const swaggerOptions = {
   basePath: '/api/v1/',
   info: { 'title': 'BerryPod API Documentation', 'version': Pack.version }
+};
+
+// Good configuration
+const goodOptions = {
+  ops: {
+    interval: 1000
+  },
+  reporters: {
+    console: [{
+      module: 'good-squeeze',
+      name: 'Squeeze',
+      args: [{
+        log: '*',
+        response: '*'
+      }]
+    }, {
+      module: 'good-console'
+    }, 'stdout']
+  }
 };
 
 server.register([
@@ -39,7 +59,7 @@ server.register([
   Nes,
   Inert,
   Vision,
-  Good,
+  { 'register': Good, 'options': goodOptions },
   { 'register': HapiSwagger, 'options': swaggerOptions }
 ], (err) => {
 
