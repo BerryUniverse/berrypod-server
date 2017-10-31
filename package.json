@@ -20,6 +20,11 @@
     "nsp": "nsp check --output checkstyle"
   },
   "author": "Konsta Laakso",
+  "contributors": [
+    {
+      "name": "Tommi Laukkanen"
+    }
+  ],
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.3.0",
